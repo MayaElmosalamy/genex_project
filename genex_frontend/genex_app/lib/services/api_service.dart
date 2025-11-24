@@ -1,0 +1,29 @@
+// lib/services/api_service.dart
+import 'package:dio/dio.dart';
+import '../core/constants.dart';
+
+class ApiService {
+  final Dio _dio;
+
+  ApiService({Dio? dio})
+      : _dio = dio ??
+            Dio(BaseOptions(
+              baseUrl: baseUrl,
+              connectTimeout: const Duration(seconds: 10),
+              receiveTimeout: const Duration(seconds: 10),
+            ));
+
+  Future<Response> post(String path, Map<String, dynamic> data,
+      {Map<String, dynamic>? headers}) {
+    return _dio.post(path, data: data, options: Options(headers: headers));
+  }
+
+  // If needed later: set auth header
+  void setAuthToken(String token) {
+    _dio.options.headers['Authorization'] = 'Token $token';
+  }
+
+  void removeAuthToken() {
+    _dio.options.headers.remove('Authorization');
+  }
+}
