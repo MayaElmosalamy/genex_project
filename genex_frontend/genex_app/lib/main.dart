@@ -5,6 +5,7 @@ import 'views/auth/signup_view.dart';
 import 'views/auth/signin_view.dart';
 import 'views/home_view.dart';
 import 'viewmodels/providers.dart';
+import 'views/patient/homepage_view.dart'; 
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -26,9 +27,22 @@ class MyApp extends ConsumerWidget {
         '/': (ctx) => const SigninView(),
         '/signin': (ctx) => const SigninView(),
         '/signup': (ctx) => const SignupView(),
-        '/home': (ctx) => const HomeView(),
+       // '/home': (ctx) => const HomeView(),
+        '/home': (ctx) => const HomeScreen(),
+
+
       },
       initialRoute: '/',
     );
   }
 }
+
+/*
+Route _fadeRoute(Widget page) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(opacity: animation, child: child);
+    },
+  );
+}*/

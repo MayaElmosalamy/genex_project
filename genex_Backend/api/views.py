@@ -5,6 +5,12 @@ from rest_framework.decorators import api_view
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 import json
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import status, views
+from rest_framework.response import Response
+from .models import User
+from .serializers import UserSerializer
 
 # Helper function to generate JWT token
 def get_tokens_for_user(user):
@@ -90,3 +96,15 @@ def signin(request):
         }
     })
 
+class ProfileView(views.APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]  # Ensures the user is authenticated
+
+    def get(self, request):
+        # Get the authenticated user from the request
+        user = request.user
+
+        # Serialize the user data (you can add more fields if necessary)
+        user_data = UserSerializer(user).data
+
+        return Response(user_data, status=status.HTTP_200_OK)
