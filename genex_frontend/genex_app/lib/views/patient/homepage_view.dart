@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'upload_screen.dart';
 import 'med_history_screen.dart';
 import 'twin_simulation_screen.dart';
+import 'profile_view.dart';  // Import ProfileScreen
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,6 +31,18 @@ class HomeScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
+
+              // Profile Button
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ProfileScreen(), // Navigate to ProfileScreen
+                  ));
+                },
+                child: const Text('View Profile'),  // Profile button label
+              ),
+              
+              const SizedBox(height: 16),
               // File Upload Button
               ElevatedButton(
                 onPressed: () {
